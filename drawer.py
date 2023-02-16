@@ -1,6 +1,7 @@
 import os
 import textwrap
 from PIL import Image, ImageFont, ImageDraw, ImageOps
+from db import Database
 
 fontIn = ImageFont.truetype("fonts/va-11-hall-a-cyr-10px.ttf", 28)
 
@@ -8,8 +9,8 @@ fontIn = ImageFont.truetype("fonts/va-11-hall-a-cyr-10px.ttf", 28)
 def drawDrink(drinkdata):
     with Image.open("img/BackGround.jpg") as im:
         d1 = ImageDraw.Draw(im)
-        d1.text((70, 105), "Bad Touch - 250$", (255, 255, 255), fontIn)
-        desc = "We are nothing but mamals after all."
+        d1.text((70, 105), drinkdata[0]+" - $"+str(drinkdata[2]), (255, 255, 255), fontIn)
+        desc = drinkdata[1]
         lines = textwrap.wrap(desc, width=37)
         y_text =330
         for line in lines:
@@ -18,24 +19,24 @@ def drawDrink(drinkdata):
 
     # resize image to fit  600, 175
     # image center should be in 370, 237
-        with Image.open("img/drinks/Bad_Touch.webp") as imdrink:
+        with Image.open("img/drinks/"+drinkdata[12]) as imdrink:
             imdrink = ImageOps.contain(imdrink, (600, 175))
             width, height = imdrink.size
             posx = 370-round((width/2))
             posy = 237-round((height/2))
             im.paste(imdrink, (posx, posy), imdrink)
 
-        ice=1
+        ice=drinkdata[9]
         if(ice==1):
             with Image.open("img\Ice.jpg") as imIce:
                 im.paste(imIce, (724, 246))
 
-        aged=0
+        aged=drinkdata[8]
         if(aged==1):
             with Image.open("img\Age.jpg") as imAge:
                 im.paste(imAge, (724, 366))
 
-        adel=0
+        adel=drinkdata[3]
         fila=0
         columna=0
         i=0
@@ -53,7 +54,7 @@ def drawDrink(drinkdata):
                 i+=1
                 adel-=1
         
-        bron=2
+        bron=drinkdata[4]
         fila=0
         columna=0
         i=0
@@ -71,7 +72,7 @@ def drawDrink(drinkdata):
                 i+=1
                 bron-=1
         
-        powdD=2
+        powdD=drinkdata[5]
         fila=0
         columna=0
         i=0
@@ -89,7 +90,7 @@ def drawDrink(drinkdata):
                 i+=1
                 powdD-=1
 
-        flan=2
+        flan=drinkdata[6]
         fila=0
         columna=0
         i=0
@@ -107,7 +108,7 @@ def drawDrink(drinkdata):
                 i+=1
                 flan-=1
         
-        karmo=4
+        karmo=drinkdata[7]
         fila=0
         columna=0
         i=0
@@ -128,6 +129,6 @@ def drawDrink(drinkdata):
         im.show()
         #im.save("test2.jpg")
 
-
-drawDrink(3)
+dbInstance = Database()
+drawDrink(dbInstance.get_Drink(1))
 
