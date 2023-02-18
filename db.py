@@ -44,7 +44,7 @@ class Database():
     data = (timestamp,drink_ID)
     cursor.execute(QUERY,data)
     result=cursor.fetchone()
-    return (True, False)[result[0]==1]
+    return (False, True)[result[0]==1]
 
   def get_Drink(self,drink_ID : int):
     QUERY="SELECT d.`Name`, d.`Descrip`, d.`Price`, d.`Adelhyde`, d.`BronExtract`, d.`PowDekta`, d.`Flanergide`, d.`Karmotrine`, d.`aged`, d.`iced`, d.`blended`, f.Name, d.`img`,d.`last_updated`,d.id FROM `drinks` d JOIN flavour f ON d.flavour=f.id WHERE d.`id`=%s"

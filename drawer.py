@@ -129,7 +129,8 @@ class Drawer():
                     i+=1
                     flan-=1
             
-            karmo=(30,drinkdata[7])[drinkdata[7]>20]
+            print(drinkdata[7])
+            karmo=(drinkdata[7],30)[drinkdata[7]>20]
             fila=0
             columna=0
             i=0
@@ -160,22 +161,16 @@ class Drawer():
         searchID =  self.db.verifyDrinkId(drink_ID)
         for file in os.listdir("img/generated"):
             fileData= re.split(r'[_.]',file)
-            if int(fileData[0])==drink_ID:
+            if int(fileData[0])==searchID:
                 print("File found\n")
-                if self.db.checkIfUpdated(drink_ID,fileData[1]):
+                if self.db.checkIfUpdated(searchID,fileData[1]):
                     print("Drink updated, must generate new file \n")
                     os.remove("img/generated/"+file)
-                    return self.drawDrink(self.db.get_Drink(drink_ID))
+                    return self.drawDrink(self.db.get_Drink(searchID))
                 else:
                     print("Drink not updated, can use generated file")
-                    return(file)
+                    return("img/generated/"+file)
         
         print("File doesn't exist. Must create a new one")
-        return self.drawDrink(self.db.get_Drink(drink_ID))
+        return self.drawDrink(self.db.get_Drink(searchID))
 
-
-dbInstance = Database()
-drawInstan = Drawer(dbInstance)
-
-
-drawInstan.drawDrink(dbInstance.get_Drink(1))
