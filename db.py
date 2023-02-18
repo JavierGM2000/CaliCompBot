@@ -20,7 +20,7 @@ class Database():
     )
 
   def get_Drink(self,drink_ID : int):
-    QUERY="SELECT `Name`, `Descrip`, `Price`, `Adelhyde`, `BronExtract`, `PowDekta`, `Flanergide`, `Karmotrine`, `aged`, `iced`, `blended`, `flavour`, `img`,`last_updated` FROM `drinks` WHERE `id`=%s"
+    QUERY="SELECT d.`Name`, d.`Descrip`, d.`Price`, d.`Adelhyde`, d.`BronExtract`, d.`PowDekta`, d.`Flanergide`, d.`Karmotrine`, d.`aged`, d.`iced`, d.`blended`, f.Name, d.`img`,d.`last_updated`,d.id FROM `drinks` d JOIN flavour f ON d.flavour=f.id WHERE d.`id`=%s"
     cursor = self.mydb.cursor(prepared=True)
     data = (drink_ID,)
 
@@ -30,8 +30,15 @@ class Database():
         return
     
     result=cursor.fetchone()
-    number_of_rows=result[0]
-
+    
+    QUERY="SELECT t.Name FROM `drink_type` dt JOIN types t ON t.id=dt.type_id WHERE `drink_id`=%s"
+    cursor.execute(QUERY,data)
+    types=[]
+    results = cursor.fetchall()
+    for row in results:
+      types.append(row[0])
+    
+    result= result + (types,)
     print(result)
     return result
 

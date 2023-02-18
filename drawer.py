@@ -2,27 +2,35 @@ import os
 import textwrap
 from PIL import Image, ImageFont, ImageDraw, ImageOps
 from db import Database
+import time
 
 fontIn = ImageFont.truetype("fonts/va-11-hall-a-cyr-10px.ttf", 28)
-
+fontInSmall = ImageFont.truetype("fonts/va-11-hall-a-cyr-10px.ttf", 20)
 
 def drawDrink(drinkdata):
     with Image.open("img/BackGround.jpg") as im:
         d1 = ImageDraw.Draw(im)
         d1.text((70, 105), drinkdata[0]+" - $"+str(drinkdata[2]), (255, 255, 255), fontIn)
+        d1.text((376, 175), drinkdata[11], (255, 255, 255), fontIn)
         desc = drinkdata[1]
         lines = textwrap.wrap(desc, width=37)
         y_text =330
         for line in lines:
             d1.text((70, y_text), line, (255, 255, 255), fontIn)
-            y_text += 30    
+            y_text += 30 
 
-    # resize image to fit  600, 175
+        i=0
+        for line in drinkdata[15]:
+            d1.text((376, 212+36*i), line, (255, 255, 255), fontIn)
+            i += 1 
+
+
+    # resize image to fit  288, 175
     # image center should be in 370, 237
         with Image.open("img/drinks/"+drinkdata[12]) as imdrink:
-            imdrink = ImageOps.contain(imdrink, (600, 175))
+            imdrink = ImageOps.contain(imdrink, (288, 175))
             width, height = imdrink.size
-            posx = 370-round((width/2))
+            posx = 214-round((width/2))
             posy = 237-round((height/2))
             im.paste(imdrink, (posx, posy), imdrink)
 
@@ -36,6 +44,14 @@ def drawDrink(drinkdata):
             with Image.open("img\Age.jpg") as imAge:
                 im.paste(imAge, (724, 366))
 
+        blend=drinkdata[10]
+        if(blend==1):
+            with Image.open("img\Blend.jpg") as imBlend:
+                im.paste(imBlend, (954, 366))
+                d1.text((962, 506), "Blended", (255, 255, 255), fontInSmall)
+                
+
+        
         adel=drinkdata[3]
         fila=0
         columna=0
@@ -76,12 +92,12 @@ def drawDrink(drinkdata):
         fila=0
         columna=0
         i=0
-        with Image.open("img\PwdD10Plus.jpg") as imBronPlus, Image.open("img\PwdD.jpg") as imBron:
+        with Image.open("img\PwdD10Plus.jpg") as imPwdDplus, Image.open("img\PwdD.jpg") as imPwdD:
             while powdD>0 and i<10:
                 if powdD>10:
-                    im.paste(imBronPlus, (1156+18*columna, 280+36*fila))
+                    im.paste(imPwdDplus, (1156+18*columna, 280+36*fila))
                 else:
-                    im.paste(imBron, (1156+18*columna, 280+36*fila))
+                    im.paste(imPwdD, (1156+18*columna, 280+36*fila))
 
                 columna+=1
                 if columna==5:
@@ -94,12 +110,12 @@ def drawDrink(drinkdata):
         fila=0
         columna=0
         i=0
-        with Image.open("img\Flan10Plus.jpg") as imBronPlus, Image.open("img\Flan.jpg") as imBron:
+        with Image.open("img\Flan10Plus.jpg") as imFlanPlus, Image.open("img\Flan.jpg") as imFlan:
             while flan>0 and i<10:
                 if flan>10:
-                    im.paste(imBronPlus, (856+18*columna, 400+36*fila))
+                    im.paste(imFlanPlus, (856+18*columna, 400+36*fila))
                 else:
-                    im.paste(imBron, (856+18*columna, 400+36*fila))
+                    im.paste(imFlan, (856+18*columna, 400+36*fila))
 
                 columna+=1
                 if columna==5:
@@ -108,16 +124,18 @@ def drawDrink(drinkdata):
                 i+=1
                 flan-=1
         
-        karmo=drinkdata[7]
+        karmo=(30,drinkdata[7])[drinkdata[7]>20]
         fila=0
         columna=0
         i=0
-        with Image.open("img\Karmo10Plus.jpg") as imBronPlus, Image.open("img\Karmo.jpg") as imBron:
+        with Image.open("img\Karmo10Plus.jpg") as imKarmoPlus, Image.open("img\Karmo.jpg") as imKarmo, Image.open("img\KarmoQuestion.jpg") as imKarmQuest:
             while karmo>0 and i<10:
-                if karmo>10:
-                    im.paste(imBronPlus, (1156+18*columna, 400+36*fila))
+                if karmo>20:
+                    im.paste(imKarmQuest, (1156+18*columna, 400+36*fila))
+                elif karmo>10:
+                    im.paste(imKarmoPlus, (1156+18*columna, 400+36*fila))
                 else:
-                    im.paste(imBron, (1156+18*columna, 400+36*fila))
+                    im.paste(imKarmo, (1156+18*columna, 400+36*fila))
 
                 columna+=1
                 if columna==5:
@@ -127,8 +145,9 @@ def drawDrink(drinkdata):
                 karmo-=1
 
         im.show()
-        #im.save("test2.jpg")
+        ts = time.time_ns()
+        im.save("img/generated/"+str(drinkdata[14])+"_"+str(ts)+".jpg")
 
 dbInstance = Database()
-drawDrink(dbInstance.get_Drink(1))
+drawDrink(dbInstance.get_Drink(3))
 
