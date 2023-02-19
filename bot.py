@@ -35,6 +35,16 @@ async def drink_by_id(ctx, drinkID):
         file = discord.File(drawInstan.getImagePath(dbInstance,drinkID), filename="Drink.jpg")
         await ctx.send(file=file)
     
+@bot.command()
+async def drink(ctx, *,drinkName):
+    with Database() as dbInstance:
+        try:
+            drinkID = int(drinkName)
+        except:
+            drinkID = dbInstance.getIdByName(drinkName)
+
+        file = discord.File(drawInstan.getImagePath(dbInstance,drinkID), filename="Drink.jpg")
+        await ctx.send(file=file)
 
 @bot.command()
 async def help(ctx):

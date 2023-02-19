@@ -31,13 +31,11 @@ class Database():
     if not isinstance(drink_ID, int):
       return 0
 
-    
     QUERY="SELECT COUNT(*) FROM `drinks` WHERE `id`=%s"
     cursor = self.mydb.cursor(prepared=True)
     data = (drink_ID,)
 
     cursor.execute(QUERY,data)
-    
     
     result=cursor.fetchone()
 
@@ -45,6 +43,29 @@ class Database():
       return drink_ID
     else:
       return 0
+  
+  #Gets the ID of a drink by name, if the name doesnt coincide with any drink it will return 0, the ID of the no drink drink
+  def getIdByName(self,name:str):
+    name = name.lower()
+    QUERY="SELECT `id` FROM `drinks` WHERE LOWER(`Name`)=%s LIMIT 0, 1"
+    data = (name,)
+    print("name is "+name)
+    cursor = self.mydb.cursor(prepared=True)
+    cursor.execute(QUERY,data)
+    result=cursor.fetchone()
+    if( not result is None ):
+      return result[0]
+    else :
+      cursor.fetchone()
+    
+    data = (name,)
+    QUERY="SELECT `drink_id` FROM `drink_alias` WHERE LOWER(`name`)=%s LIMIT 0, 1"
+    cursor.execute(QUERY,data)
+    result=cursor.fetchone()
+    if( not result is None ):
+      return result[0]
+
+    return 0
 
   #Given a drink id and a timestamp, returns True if the update date is newer than the given timstamp
   def checkIfUpdated(self,drink_ID,timestamp):
