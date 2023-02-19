@@ -19,19 +19,28 @@ class Database():
       ssl_disabled=True
     )
 
+  def __enter__(self):
+        return self
+
+  def __exit__(self, type, value, traceback):
+    self.mydb.close()
+
   #Gets a drink ID and checks if the number coincides with any drink id on the database.
   #If the id doesn't exist, or the recieved value is not a number return 0, the ID of the no drink drink
   def verifyDrinkId(self,drink_ID):
     if not isinstance(drink_ID, int):
       return 0
 
+    
     QUERY="SELECT COUNT(*) FROM `drinks` WHERE `id`=%s"
     cursor = self.mydb.cursor(prepared=True)
     data = (drink_ID,)
 
     cursor.execute(QUERY,data)
-
+    
+    
     result=cursor.fetchone()
+
     if result[0]!=0:
       return drink_ID
     else:
@@ -60,10 +69,9 @@ class Database():
     
     QUERY="SELECT t.Name FROM `drink_type` dt JOIN types t ON t.id=dt.type_id WHERE `drink_id`=%s"
     cursor.execute(QUERY,data)
-    types=[]
+    
     results = cursor.fetchall()
-    for row in results:
-      types.append(row[0])
+    types=[row[0] for row in results]
     
     result= result + (types,)
     print(result)

@@ -13,8 +13,7 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
-dbInstance = Database()
-drawInstan = Drawer(dbInstance)
+drawInstan = Drawer()
 
 intents = discord.Intents(33280)
 activity = discord.Game(name="Showing info about drinks that change lives")
@@ -27,10 +26,14 @@ async def on_ready():
 
 @bot.command()
 async def drink_by_id(ctx, drinkID):
-    if not isinstance(drinkID, int):
-      drinkID = 0
-    file = discord.File(drawInstan.getImagePath(drinkID), filename="Drink.jpg")
-    await ctx.send(file=file)
+    try:
+        drinkID = int(drinkID)
+    except:
+        drinkID = 0
+    
+    with Database() as dbInstance:
+        file = discord.File(drawInstan.getImagePath(dbInstance,drinkID), filename="Drink.jpg")
+        await ctx.send(file=file)
     
 
 @bot.command()

@@ -9,9 +9,6 @@ fontIn = ImageFont.truetype("fonts/va-11-hall-a-cyr-10px.ttf", 28)
 fontInSmall = ImageFont.truetype("fonts/va-11-hall-a-cyr-10px.ttf", 20)
 
 class Drawer():
-    def __init__(self,dbConnection:Database):
-        self.db = dbConnection
-
     def drawDrink(self,drinkdata):
         with Image.open("img/BackGround.jpg") as im:
             d1 = ImageDraw.Draw(im)
@@ -157,20 +154,20 @@ class Drawer():
             return img_path
 
     #Gets the path of the image with a drink id
-    def getImagePath(self,drink_ID):
-        searchID =  self.db.verifyDrinkId(drink_ID)
+    def getImagePath(self,dbConnection:Database,drink_ID:int):
+        searchID =  dbConnection.verifyDrinkId(drink_ID)
         for file in os.listdir("img/generated"):
             fileData= re.split(r'[_.]',file)
             if int(fileData[0])==searchID:
                 print("File found\n")
-                if self.db.checkIfUpdated(searchID,fileData[1]):
-                    print("Drink updated, must generate new file \n")
+                if dbConnection.checkIfUpdated(searchID,fileData[1]):
+                    print("Drink updated, must generate new file ")
                     os.remove("img/generated/"+file)
-                    return self.drawDrink(self.db.get_Drink(searchID))
+                    return self.drawDrink(dbConnection.get_Drink(searchID))
                 else:
                     print("Drink not updated, can use generated file")
                     return("img/generated/"+file)
         
         print("File doesn't exist. Must create a new one")
-        return self.drawDrink(self.db.get_Drink(searchID))
+        return self.drawDrink(dbConnection.get_Drink(searchID))
 
