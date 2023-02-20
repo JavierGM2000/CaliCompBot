@@ -77,7 +77,24 @@ async def jill(ctx,asset,*,message=""):
     file = discord.File(drawInstan.drawCharacterTalk("Jill",(105,129,193),chars[charPose-1],message), filename="Drink.jpg")
     await ctx.send(file=file)
 
-
+@bot.command()
+async def gill(ctx,asset,*,message=""):
+    chars = ["img\gill\Gill.png",
+             "img\gill\GillFuckboy.png",
+             "img\gill\Gill0_0.png",
+             "img\gill\GillFocus.png",
+             "img\gill\GillSad.png"]
+    try:
+        charPose = int(asset)
+    except:
+        charPose=random.randint(1,len(chars))
+        message = asset+" "+message
+    
+    if(charPose>len(chars) or charPose<=0):
+        await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
+        return
+    file = discord.File(drawInstan.drawCharacterTalk("Gillian",(124,44,179),chars[charPose-1],message), filename="Drink.jpg")
+    await ctx.send(file=file)
 
 @bot.command()
 async def help(ctx):
