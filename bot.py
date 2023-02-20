@@ -53,7 +53,7 @@ async def drink(ctx, *,drinkName):
         except:
             drinkID = dbInstance.getIdByName(drinkName)
 
-        file = discord.File(drawInstan.getImagePath(dbInstance,drinkID), filename="Drink.jpg")
+        file = discord.File(drawInstan.getImagePath(dbInstance,drinkID), filename="Drink.jpeg")
         await ctx.send(file=file)
 
 @bot.command()
@@ -74,7 +74,7 @@ async def jill(ctx,asset,*,message=""):
     if(charPose>len(chars) or charPose<=0):
         await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
         return
-    file = discord.File(drawInstan.drawCharacterTalk("Jill",(105,129,193),chars[charPose-1],message), filename="Drink.jpg")
+    file = discord.File(drawInstan.drawCharacterTalk("Jill",(105,129,193),chars[charPose-1],message), filename="Drink.jpeg")
     await ctx.send(file=file)
 
 @bot.command()
@@ -93,7 +93,7 @@ async def gill(ctx,asset,*,message=""):
     if(charPose>len(chars) or charPose<=0):
         await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
         return
-    file = discord.File(drawInstan.drawCharacterTalk("Gillian",(124,44,179),chars[charPose-1],message), filename="Drink.jpg")
+    file = discord.File(drawInstan.drawCharacterTalk("Gillian",(124,44,179),chars[charPose-1],message), filename="Drink.jpeg")
     await ctx.send(file=file)
 
 @bot.command()

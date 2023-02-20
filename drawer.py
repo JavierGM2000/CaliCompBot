@@ -150,8 +150,8 @@ class Drawer():
 
             #im.show()
             ts = time.time()
-            img_path = "img/generated/"+str(drinkdata[14])+"_"+str(ts)+".jpg"
-            im.save(img_path)
+            img_path = "img/generated/"+str(drinkdata[14])+"_"+str(ts)+".jpeg"
+            im.save(img_path, subsampling=0, quality=95)
             return img_path
 
     def drawCharacterTalk(self,charName:str,charColor,charPath:str, message:str):
@@ -172,8 +172,8 @@ class Drawer():
                 im.paste(imChar, (posx, posy), imChar)
 
             ts = time.time()
-            imgPath = "img/generatedChat/Gen"+str(ts)+"-"+str(random.randint(0,9999))+".jpg"
-            im.save(imgPath)
+            imgPath = "img/generatedChat/Gen"+str(ts)+"-"+str(random.randint(0,9999))+".jpeg"
+            im.save(imgPath,format='JPEG', subsampling=0, quality=95)
             return (imgPath)
 
     #Gets the path of the image with a drink id
