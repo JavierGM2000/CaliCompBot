@@ -97,6 +97,27 @@ async def gill(ctx,asset,*,message=""):
     await ctx.send(file=file)
 
 @bot.command()
+async def dana(ctx,asset,*,message=""):
+    chars = ["img\dana\Dana.png",
+             "img\dana\DanaWorry.png",
+             "img\dana\DanaHelmet.png",
+             "img\dana\DanaThink.png",
+             "img\dana\DanaWorried.png",
+             "img\dana\DanaSerious.png",
+             "img\dana\KidDana.webp"]
+    try:
+        charPose = int(asset)
+    except:
+        charPose=random.randint(1,len(chars))
+        message = asset+" "+message
+    
+    if(charPose>len(chars) or charPose<=0):
+        await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
+        return
+    file = discord.File(drawInstan.drawCharacterTalk("Dana",(199,33,35),chars[charPose-1],message), filename="Drink.jpeg")
+    await ctx.send(file=file)
+
+@bot.command()
 async def help(ctx):
     await ctx.send('Bot is being developed and tested. Contact AlpacaCharlie#7998 for more information')
 
