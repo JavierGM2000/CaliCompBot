@@ -1,6 +1,8 @@
 # bot.py
 import os
 
+import random
+
 import discord
 from discord.ext.commands import Bot, Context
 from discord.ext import commands
@@ -23,6 +25,14 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
+
+@bot.command()
+async def rand(ctx):
+    drinkID = random.randint(1, 31)
+    
+    with Database() as dbInstance:
+        file = discord.File(drawInstan.getImagePath(dbInstance,drinkID), filename="Drink.jpg")
+        await ctx.send(file=file)
 
 @bot.command()
 async def drink_by_id(ctx, drinkID):
