@@ -153,6 +153,19 @@ class Drawer():
             im.save(img_path)
             return img_path
 
+    def drawCharacterTalk(self,charName:str,charColor,charPath:str, message:str):
+        finalMessage= charName + ": " + message
+        lines = textwrap.wrap(finalMessage, width=50)
+        with Image.open("img/BackGroundChat.jpg") as im:
+            d1 = ImageDraw.Draw(im)
+            y_text =566
+            for line in lines:
+                d1.text((46, y_text), line, (255, 255, 255), fontIn)
+                y_text += 30 
+            d1.text((46,566),charName,charColor,fontIn)
+        im.show()
+        return
+
     #Gets the path of the image with a drink id
     def getImagePath(self,dbConnection:Database,drink_ID:int):
         searchID =  dbConnection.verifyDrinkId(drink_ID)
@@ -171,3 +184,5 @@ class Drawer():
         print("File doesn't exist. Must create a new one")
         return self.drawDrink(dbConnection.get_Drink(searchID))
 
+#drawInstance = Drawer()
+#drawInstance.drawCharacterTalk("Jill",(104,129,196),"test","Why are there so many cirno fumos here")
