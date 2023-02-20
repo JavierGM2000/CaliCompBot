@@ -165,7 +165,7 @@ class Drawer():
                 y_text += 30 
             d1.text((46,566),charName+":",charColor,fontIn)
             with Image.open(charPath) as imChar:
-                imChar = ImageOps.contain(imChar, (660, 430),Image.ANTIALIAS)
+                imChar = ImageOps.contain(imChar, (660, 430),Image.BOX)
                 width, height = imChar.size
                 posx = 369-round((width/2))
                 posy = 536-round(height)
