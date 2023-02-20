@@ -1,6 +1,7 @@
 import os
 import textwrap
 import re
+import random
 from PIL import Image, ImageFont, ImageDraw, ImageOps
 from db import Database
 import time
@@ -162,9 +163,18 @@ class Drawer():
             for line in lines:
                 d1.text((46, y_text), line, (255, 255, 255), fontIn)
                 y_text += 30 
-            d1.text((46,566),charName,charColor,fontIn)
-        im.show()
-        return
+            d1.text((46,566),charName+":",charColor,fontIn)
+            with Image.open(charPath) as imChar:
+                imChar = ImageOps.contain(imChar, (660, 430),Image.ANTIALIAS)
+                width, height = imChar.size
+                posx = 369-round((width/2))
+                posy = 536-round(height)
+                im.paste(imChar, (posx, posy), imChar)
+
+            ts = time.time()
+            imgPath = "img/generatedChat/Gen"+str(ts)+"-"+str(random.randint(0,9999))+".jpg"
+            im.save(imgPath)
+            return (imgPath)
 
     #Gets the path of the image with a drink id
     def getImagePath(self,dbConnection:Database,drink_ID:int):

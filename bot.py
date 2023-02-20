@@ -57,6 +57,29 @@ async def drink(ctx, *,drinkName):
         await ctx.send(file=file)
 
 @bot.command()
+async def jill(ctx,asset,*,message=""):
+    chars = ["img\jill\Jill.webp",
+             "img\jill\JillShocked.png",
+             "img\jill\JillUh.png",
+             "img\jill\JillSad.png",
+             "img\jill\JillSmile.png",
+             "img\jill\JillHappy.png",
+             "img\jill\KidJill.webp"]
+    try:
+        charPose = int(asset)
+    except:
+        charPose=random.randint(1,len(chars))
+        message = asset+" "+message
+    
+    if(charPose>len(chars) or charPose<=0):
+        await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
+        return
+    file = discord.File(drawInstan.drawCharacterTalk("Jill",(105,129,193),chars[charPose-1],message), filename="Drink.jpg")
+    await ctx.send(file=file)
+
+
+
+@bot.command()
 async def help(ctx):
     await ctx.send('Bot is being developed and tested. Contact AlpacaCharlie#7998 for more information')
 
