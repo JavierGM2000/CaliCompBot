@@ -147,7 +147,25 @@ async def ingram(ctx,asset,*,message=""):
     if(charPose>len(chars) or charPose<=0):
         await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
         return
-    file = discord.File(drawInstan.drawCharacterTalk("Ingram",(167,75,86),chars[charPose-1],message), filename="Drink.jpeg")
+    file = discord.File(drawInstan.drawCharacterTalk("Ingram",(208,59,37),chars[charPose-1],message), filename="Drink.jpeg")
+    await ctx.send(file=file)
+
+@bot.command()
+async def sei(ctx,asset,*,message=""):
+    chars = ["img\sei\SeiHelmet.png",
+             "img\sei\Sei.png",
+             "img\sei\SeiSmile.png",
+             "img\sei\SeiDrunk.png"]
+    try:
+        charPose = int(asset)
+    except:
+        charPose=random.randint(1,len(chars))
+        message = asset+" "+message
+    
+    if(charPose>len(chars) or charPose<=0):
+        await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
+        return
+    file = discord.File(drawInstan.drawCharacterTalk("Sei",(92,167,172),chars[charPose-1],message), filename="Drink.jpeg")
     await ctx.send(file=file)
 
 @bot.command()
