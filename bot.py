@@ -221,6 +221,24 @@ async def dorothy(ctx,asset,*,message=""):
     await ctx.send(file=file)
 
 @bot.command()
+async def jamie(ctx,asset,*,message=""):
+    chars = ["img\jamie\Jamie.png",
+             "img\jamie\JamieThinking.png",
+             "img\jamie\JamieThinkingHarder.png",
+             "img\jamie\JamieWorried.png"]
+    try:
+        charPose = int(asset)
+    except:
+        charPose=random.randint(1,len(chars))
+        message = asset+" "+message
+    
+    if(charPose>len(chars) or charPose<=0):
+        await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
+        return
+    file = discord.File(drawInstan.drawCharacterTalk("Jamie",(162,120,52),chars[charPose-1],message), filename="Drink.jpeg")
+    await ctx.send(file=file)
+
+@bot.command()
 async def help(ctx):
     await ctx.send('Bot is being developed and tested. Contact AlpacaCharlie#7998 for more information')
 
