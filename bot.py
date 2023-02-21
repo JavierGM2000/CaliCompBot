@@ -155,7 +155,14 @@ async def sei(ctx,asset,*,message=""):
     chars = ["img\sei\SeiHelmet.png",
              "img\sei\Sei.png",
              "img\sei\SeiSmile.png",
-             "img\sei\SeiDrunk.png"]
+             "img\sei\SeiDrunk.png",
+             "img\sei\SeiSad.png",
+             "img\sei\SeiBandage.png",
+             "img\sei\SeiBandageSad.png",
+             "img\sei\SeiBandageTear.png",
+             "img\sei\SeiBandageWorried.png",
+             "img\sei\SeiBandagWorriedEyesClosed.png",
+             "img\sei\SeiBandageHappy.png"]
     try:
         charPose = int(asset)
     except:
@@ -171,5 +178,10 @@ async def sei(ctx,asset,*,message=""):
 @bot.command()
 async def help(ctx):
     await ctx.send('Bot is being developed and tested. Contact AlpacaCharlie#7998 for more information')
+
+@bot.command()
+async def sdown(ctx):
+    await ctx.send('Killing bot')
+    exit()
 
 bot.run(TOKEN)
