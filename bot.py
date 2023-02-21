@@ -131,7 +131,7 @@ async def donovan(ctx,asset,*,message=""):
     if(charPose>len(chars) or charPose<=0):
         await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
         return
-    file = discord.File(drawInstan.drawCharacterTalk("Donovan",(167,75,86),chars[charPose-1],message), filename="Drink.jpeg")
+    file = discord.File(drawInstan.drawCharacterTalk("Mr. Donovan",(167,75,86),chars[charPose-1],message), filename="Drink.jpeg")
     await ctx.send(file=file)
 
 @bot.command()
@@ -173,6 +173,51 @@ async def sei(ctx,asset,*,message=""):
         await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
         return
     file = discord.File(drawInstan.drawCharacterTalk("Sei",(92,167,172),chars[charPose-1],message), filename="Drink.jpeg")
+    await ctx.send(file=file)
+
+@bot.command()
+async def kim(ctx,asset,*,message=""):
+    chars = ["img\kim\Kim.png",
+             "img\kim\KimAngry.png",
+             "img\kim\KimCry.png",
+             "img\kim\KimMURDERMURDER.png"]
+    try:
+        charPose = int(asset)
+    except:
+        charPose=random.randint(1,len(chars))
+        message = asset+" "+message
+    
+    if(charPose>len(chars) or charPose<=0):
+        await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
+        return
+    file = discord.File(drawInstan.drawCharacterTalk("Kim",(193,124,207),chars[charPose-1],message), filename="Drink.jpeg")
+    await ctx.send(file=file)
+
+@bot.command()
+async def dorothy(ctx,asset,*,message=""):
+    chars = ["img\dorothy\Dorothy.png",
+             "img\dorothy\DorothyCry.png",
+             "img\dorothy\DorothyCry2.png",
+             "img\dorothy\DorothyHeartEyes.png",
+             "img\dorothy\DorothyInquisition.png",
+             "img\dorothy\DorothyNoIdea.png",
+             "img\dorothy\DorothyOnigiri.png",
+             "img\dorothy\DorothyPout.png",
+             "img\dorothy\DorothySad.png",
+             "img\dorothy\DorothySmug.png",
+             "img\dorothy\DorothySurprised.png",
+             "img\dorothy\DorothyUnamused.png",
+             "img\dorothy\DorothyKids.webp"]
+    try:
+        charPose = int(asset)
+    except:
+        charPose=random.randint(1,len(chars))
+        message = asset+" "+message
+    
+    if(charPose>len(chars) or charPose<=0):
+        await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
+        return
+    file = discord.File(drawInstan.drawCharacterTalk("Dorothy",(245,11,158),chars[charPose-1],message), filename="Drink.jpeg")
     await ctx.send(file=file)
 
 @bot.command()
