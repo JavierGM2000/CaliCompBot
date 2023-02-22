@@ -255,7 +255,32 @@ async def kiramiki(ctx,asset,*,message=""):
     if(charPose>len(chars) or charPose<=0):
         await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
         return
-    file = discord.File(drawInstan.drawCharacterTalk("*Kira* Miki:",(50,114,52),chars[charPose-1],message), filename="Drink.jpeg")
+    file = discord.File(drawInstan.drawCharacterTalk("*Kira* Miki",(50,114,52),chars[charPose-1],message), filename="Drink.jpeg")
+    await ctx.send(file=file)
+
+@bot.command()
+async def alma(ctx,asset,*,message=""):
+    chars = ["img\\alma\Alma.png",
+             "img\\alma\AlmaDrunk.png",
+             "img\\alma\AlmaEmbarrassed.png",
+             "img\\alma\AlmaHappy.png",
+             "img\\alma\AlmaIdontknowwhattocallthisface.png",
+             "img\\alma\AlmaPointyFinger.png",
+             "img\\alma\AlmaSerious.png",
+             "img\\alma\AlmaSmug.png",
+             "img\\alma\AlmaTired.png",
+             "img\\alma\AlmaWorried.png",
+             "img\\alma\AlmaKid.webp"]
+    try:
+        charPose = int(asset)
+    except:
+        charPose=random.randint(1,len(chars)-1)
+        message = asset+" "+message
+    
+    if(charPose>len(chars) or charPose<=0):
+        await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
+        return
+    file = discord.File(drawInstan.drawCharacterTalk("Alma",(248,190,65),chars[charPose-1],message), filename="Drink.jpeg")
     await ctx.send(file=file)
 
 @bot.command()
