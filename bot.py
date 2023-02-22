@@ -239,6 +239,26 @@ async def jamie(ctx,asset,*,message=""):
     await ctx.send(file=file)
 
 @bot.command()
+async def kiramiki(ctx,asset,*,message=""):
+    chars = ["img\kiramiki\KiraMiki.png",
+             "img\kiramiki\KiraMikiAngry.png",
+             "img\kiramiki\KiraMikiSmile.png",
+             "img\kiramiki\KiraMikiStare.png",
+             "img\kiramiki\KiraMikiOld1.png",
+             "img\kiramiki\KiraMikiOld2.png"]
+    try:
+        charPose = int(asset)
+    except:
+        charPose=random.randint(1,len(chars)-2)
+        message = asset+" "+message
+    
+    if(charPose>len(chars) or charPose<=0):
+        await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
+        return
+    file = discord.File(drawInstan.drawCharacterTalk("*Kira* Miki:",(50,114,52),chars[charPose-1],message), filename="Drink.jpeg")
+    await ctx.send(file=file)
+
+@bot.command()
 async def help(ctx):
     await ctx.send('Bot is being developed and tested. Contact AlpacaCharlie#7998 for more information')
 
