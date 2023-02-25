@@ -164,6 +164,8 @@ class Drawer():
                 d1.text((46, y_text), line, (255, 255, 255), fontIn)
                 y_text += 30 
             d1.text((46,566),charName+":",charColor,fontIn)
+            d1.text((880,566),"Generated with ",(255, 255, 255),fontIn)
+            d1.text((880,596),"CalicompBot",(255, 255, 255),fontIn)
             with Image.open(charPath) as imChar:
                 imChar = ImageOps.contain(imChar, (660, 430),Image.BOX)
                 width, height = imChar.size
