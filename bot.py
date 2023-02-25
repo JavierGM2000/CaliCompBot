@@ -325,6 +325,48 @@ async def art(ctx,asset,*,message=""):
     await ctx.send(file=file)
 
 @bot.command()
+async def nicole(ctx,asset,*,message=""):
+    chars = ["img\\nicole\\Nicole.png",
+             "img\\nicole\\NicoleAwoo.png",
+             "img\\nicole\\NicoleDrunk.png",
+             "img\\nicole\\NicoleDrunkYay.png",
+             "img\\nicole\\NicoleFanGirl.png",
+             "img\\nicole\\NicoleHappy.png",
+             "img\\nicole\\NicolePout.png",
+             "img\\nicole\\NicoleUltraYay.png"]
+    try:
+        charPose = int(asset)
+    except:
+        charPose=random.randint(1,len(chars))
+        message = asset+" "+message
+    
+    if(charPose>len(chars) or charPose<=0):
+        await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
+        return
+    file = discord.File(drawInstan.drawCharacterTalk("Streaming-chan",(76,174,211),chars[charPose-1],message), filename="Drink.jpeg")
+    await ctx.send(file=file)
+
+@bot.command()
+async def betty(ctx,asset,*,message=""):
+    chars = ["img\\betty\Betty.png",
+             "img\\betty\BettyDrunk.png",
+             "img\\betty\BettyWhenLilim.png",
+             "img\\betty\BettyWhenNoLilim.png",
+             "img\\betty\BettyWorried.png",
+             "img\\betty\KidBetty.webp"]
+    try:
+        charPose = int(asset)
+    except:
+        charPose=random.randint(1,len(chars)-1)
+        message = asset+" "+message
+    
+    if(charPose>len(chars) or charPose<=0):
+        await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
+        return
+    file = discord.File(drawInstan.drawCharacterTalk("Betty",(94,232,51),chars[charPose-1],message), filename="Drink.jpeg")
+    await ctx.send(file=file)
+
+@bot.command()
 async def help(ctx):
     await ctx.send('Bot is being developed and tested. Contact AlpacaCharlie#7998 for more information')
 
