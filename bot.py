@@ -367,6 +367,22 @@ async def betty(ctx,asset,*,message=""):
     await ctx.send(file=file)
 
 @bot.command()
+async def deal(ctx,asset,*,message=""):
+    chars = ["img\deal\Deal.png",
+             "img\deal\DealClosedEyes.png"]
+    try:
+        charPose = int(asset)
+    except:
+        charPose=random.randint(1,len(chars))
+        message = asset+" "+message
+    
+    if(charPose>len(chars) or charPose<=0):
+        await ctx.send("Sprite selector has to be between 1 and "+ str(len(chars)))
+        return
+    file = discord.File(drawInstan.drawCharacterTalk("Deal",(204,255,112),chars[charPose-1],message), filename="Drink.jpeg")
+    await ctx.send(file=file)
+
+@bot.command()
 async def help(ctx):
     await ctx.send('Bot is being developed and tested. Contact AlpacaCharlie#7998 for more information')
 
