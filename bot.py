@@ -241,8 +241,15 @@ async def deal(ctx,asset,*,message=""):
 taylorSprites = ["img\\taylor\\Taylor.png"]
 @bot.command()
 async def taylor(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,dealSprites,asset,0,"Taylor",(241,173,188),message)
+    await drawCharacterByCommand(ctx,taylorSprites,asset,0,"Taylor",(241,173,188),message)
 
+virgilioSprites = ["img\\virgilio\\Virgilio.png",
+                   "img\\virgilio\\VirgilioSmug.png",
+                   "img\\virgilio\\VirgilioThinking.png",
+                   "img\\virgilio\\VirgilioThinking.png"]
+@bot.command()
+async def virgilio(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,virgilioSprites,asset,0,"Virgilio",(161,126,180),message)
 
 @bot.command()
 async def help(ctx):
