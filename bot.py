@@ -264,6 +264,11 @@ cassSprites = ["img\cass\Cass.png",
 async def cass(ctx,asset,*,message=""):
     await drawCharacterByCommand(ctx,cassSprites,asset,0,"Cass",(168,121,176),message)
 
+radShibaSprites = ["img\dogs\RadShiba.png"]
+@bot.command()
+async def radshiba(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,radShibaSprites,asset,0,"Rad Shiba",(242,242,92),message)
+
 @bot.command()
 async def help(ctx):
     await ctx.send('Bot is being developed and tested.')
