@@ -251,6 +251,19 @@ virgilioSprites = ["img\\virgilio\\Virgilio.png",
 async def virgilio(ctx,asset,*,message=""):
     await drawCharacterByCommand(ctx,virgilioSprites,asset,0,"Virgilio",(161,126,180),message)
 
+brianSprites = ["img\\brian\\Brian.png",
+                "img\\brian\\BrianEyesClosed.png"]
+@bot.command()
+async def brian(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,brianSprites,asset,0,"Brian",(223,191,68),message)
+
+cassSprites = ["img\cass\Cass.png",
+                "img\cass\CassEyesClosed.png",
+                "img\cass\CassFocus.png"]
+@bot.command()
+async def cass(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,cassSprites,asset,0,"Cass",(168,121,176),message)
+
 @bot.command()
 async def help(ctx):
     await ctx.send('Bot is being developed and tested.')
