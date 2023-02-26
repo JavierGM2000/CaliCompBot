@@ -34,7 +34,7 @@ async def drawCharacterByCommand(ctx,spriteList,asset,secret,charName,charColor,
     await ctx.send(file=file)
 
 intents = discord.Intents(33280)
-activity = discord.Game(name="Showing info about drinks that change lives")
+activity = discord.Game(name="&help")
 bot = Bot(command_prefix="&",intents=intents,activity=activity)
 bot.remove_command('help')
 
@@ -287,9 +287,58 @@ gabbySprites = ["img\gabby\Gabby.png",
 async def gabby(ctx,asset,*,message=""):
     await drawCharacterByCommand(ctx,gabbySprites,asset,0,"Gabby",(148,101,117),message)
 
+nachoSprites = ["img\dogs\\Nacho.png"]
+@bot.command()
+async def nacho(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,nachoSprites,asset,0,"Nacho",(155,87,110),message)
+
+vellaSprites = ["img\essentia\Essentia.png",
+                "img\essentia\EssentiaEyesClosed.png"]
+@bot.command()
+async def vella(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,vellaSprites,asset,0,"\"Vella\"",(240,194,196),message)
+
+essentiaSprites = ["img\essentia\Essentia.png",
+                "img\essentia\EssentiaEyesClosed.png"]
+@bot.command()
+async def essentia(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,essentiaSprites,asset,0,"Essentia",(180,198,160),message)
+
+lexiSprites = ["img\lexi\Lexi.png",
+                "img\lexi\LexiEyesClosed.png"]
+@bot.command()
+async def lexi(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,lexiSprites,asset,0,"Lexi",(65,170,228),message)
+
+tomcatSprites = ["img\\tomcat\\TOMCAT.png",
+                "img\\tomcat\\TOMCATeyesClosed.png"]
+@bot.command()
+async def tomcat(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,tomcatSprites,asset,0,"TOMCAT",(248,242,194),message)
+
+jessSprites = ["img\jess\Jess.png",
+                "img\jess\JessEyesClosed.png"]
+@bot.command()
+async def jess(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,jessSprites,asset,0,"Jess",(238,105,124),message)
+
+annaSprites = ["img\anna\Anna.png",
+                "img\\anna\AnnaGlitch1.png",
+                "img\\anna\AnnaGlitch2.png",
+                "img\\anna\AnnaGlitch3.png",
+                "img\\anna\AnnaGlitch4.png",
+                "img\\anna\AnnaGlitch5.png",
+                "img\\anna\\AnnaHappy.png",
+                "img\\anna\\AnnaSmile.png",
+                "img\\anna\\AnnaThinking.png",
+                "img\\anna\\AnnaOld.png"]
+@bot.command()
+async def anna(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,annaSprites,asset,1,"Anna",(255,255,255),message)
+
 @bot.command()
 async def help(ctx):
-    await ctx.send('Bot is being developed and tested.')
+    await ctx.send('&drink [id or name] - Shows info about the drink \n &rand - Shows info about a random drink \n &jill [sprite_id optional] text - Generates a image with the given text, without sprite id, the sprite is random \n Character aviable: &anna, &art, &betty, &brian, &cass, &dana, &deal,&radshiba, &nacho, &donovan, &dorothy, &essentia, &gabby, &gill, &ingram, &jamie, &jess, &jill, &kim, &kiramiki, &lexi, &mario, &nicole, &norma, &sei, &stella, &taylor, &tomcat, &vella, &virgilio \n Some characters have secret sprites that can\'t appear randomly')
 
 @bot.command()
 async def sdown(ctx):
