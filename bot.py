@@ -275,6 +275,18 @@ normaSprites = ["img\\norma\\Norma.png",
 async def norma(ctx,asset,*,message=""):
     await drawCharacterByCommand(ctx,normaSprites,asset,0,"Norma",(247,14,141),message)
 
+gabbySprites = ["img\gabby\Gabby.png",
+                "img\gabby\GabbyAngry.png",
+                "img\gabby\GabbyAngryCry.png",
+                "img\gabby\GabbyCry.png",
+                "img\gabby\GabbyEyesClosed.png",
+                "img\gabby\GabbyLookAway.png",
+                "img\gabby\GabbyMoreAngry.png",
+                "img\gabby\GabbySmile.png"]
+@bot.command()
+async def gabby(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,gabbySprites,asset,0,"Gabby",(148,101,117),message)
+
 @bot.command()
 async def help(ctx):
     await ctx.send('Bot is being developed and tested.')
