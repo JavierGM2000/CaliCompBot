@@ -269,6 +269,12 @@ radShibaSprites = ["img\dogs\RadShiba.png"]
 async def radshiba(ctx,asset,*,message=""):
     await drawCharacterByCommand(ctx,radShibaSprites,asset,0,"Rad Shiba",(242,242,92),message)
 
+normaSprites = ["img\\norma\\Norma.png",
+                "img\\norma\\NormaEyesClosed.png"]
+@bot.command()
+async def norma(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,normaSprites,asset,0,"Norma",(247,14,141),message)
+
 @bot.command()
 async def help(ctx):
     await ctx.send('Bot is being developed and tested.')
