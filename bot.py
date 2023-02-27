@@ -292,8 +292,8 @@ nachoSprites = ["img\dogs\\Nacho.png"]
 async def nacho(ctx,asset,*,message=""):
     await drawCharacterByCommand(ctx,nachoSprites,asset,0,"Nacho",(155,87,110),message)
 
-vellaSprites = ["img\essentia\Essentia.png",
-                "img\essentia\EssentiaEyesClosed.png"]
+vellaSprites = ["img\\vella\\Vella.png",
+                "img\\vella\\VellaEyesClosed.png"]
 @bot.command()
 async def vella(ctx,asset,*,message=""):
     await drawCharacterByCommand(ctx,vellaSprites,asset,0,"\"Vella\"",(240,194,196),message)
@@ -322,7 +322,7 @@ jessSprites = ["img\jess\Jess.png",
 async def jess(ctx,asset,*,message=""):
     await drawCharacterByCommand(ctx,jessSprites,asset,0,"Jess",(238,105,124),message)
 
-annaSprites = ["img\anna\Anna.png",
+annaSprites = ["img\\anna\\Anna.png",
                 "img\\anna\AnnaGlitch1.png",
                 "img\\anna\AnnaGlitch2.png",
                 "img\\anna\AnnaGlitch3.png",
@@ -335,6 +335,17 @@ annaSprites = ["img\anna\Anna.png",
 @bot.command()
 async def anna(ctx,asset,*,message=""):
     await drawCharacterByCommand(ctx,annaSprites,asset,1,"Anna",(255,255,255),message)
+
+marioSprites = ["img\mario\Mario.png",
+                "img\mario\MarioHappy.png",
+                "img\mario\MarioSad.png",
+                "img\mario\MarioSadder.png",
+                "img\mario\MarioSatisfied.png",
+                "img\mario\MarioSurprise.png",
+                "img\mario\MarioWorry.png"]
+@bot.command()
+async def mario(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,marioSprites,asset,1,"Mario",(173,3,50),message)
 
 @bot.command()
 async def help(ctx):
