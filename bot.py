@@ -152,6 +152,10 @@ dorothySprites = ["img\dorothy\Dorothy.png",
                   "img\dorothy\DorothySmug.png",
                   "img\dorothy\DorothySurprised.png",
                   "img\dorothy\DorothyUnamused.png",
+                  "img\dorothy\dorothyOld.png",
+                  "img\dorothy\dorothy-cat.png",
+                  "img\dorothy\dorothy detail.png",
+                  "img\dorothy\dorothy detail cat.png",
                   "img\dorothy\DorothyKids.webp"]
 @bot.command()
 async def dorothy(ctx,asset,*,message=""):
@@ -160,10 +164,12 @@ async def dorothy(ctx,asset,*,message=""):
 jamieSprites = ["img\jamie\Jamie.png",
                 "img\jamie\JamieThinking.png",
                 "img\jamie\JamieThinkingHarder.png",
-                "img\jamie\JamieWorried.png"]
+                "img\jamie\JamieWorried.png",
+                "img\jamie\jamieOld.png",
+                "img\jamie\jamie detail.png"]
 @bot.command()
 async def jamie(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,jamieSprites,asset,0,"Jamie",(162,120,52),message,438)
+    await drawCharacterByCommand(ctx,jamieSprites,asset,2,"Jamie",(162,120,52),message,438)
 
 kiramikiSprites = ["img\kiramiki\KiraMiki.png",
                    "img\kiramiki\KiraMikiAngry.png",
@@ -185,10 +191,13 @@ almaSprites = ["img\\alma\Alma.png",
                "img\\alma\AlmaSmug.png",
                "img\\alma\AlmaTired.png",
                "img\\alma\AlmaWorried.png",
+               "img\\alma\keki2.png",
+               "img\\alma\keki3.png",
+               "img\\alma\keki 3 detail.png",
                "img\\alma\AlmaKid.webp"]
 @bot.command()
 async def alma(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,almaSprites,asset,0,"Alma",(248,190,65),message,418)
+    await drawCharacterByCommand(ctx,almaSprites,asset,1,"Alma",(248,190,65),message,418)
 
 stellaSprites = ["img\stella\Stella.png",
                  "img\stella\StellaAwooo.png",
