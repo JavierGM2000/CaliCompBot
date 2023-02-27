@@ -17,7 +17,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 
 drawInstan = Drawer()
 
-async def drawCharacterByCommand(ctx,spriteList,asset,secret,charName,charColor,message):
+async def drawCharacterByCommand(ctx,spriteList,asset,secret,charName,charColor,message,charHeight:int=536):
     chars = spriteList
     try:
         charPose = int(asset)
@@ -30,7 +30,7 @@ async def drawCharacterByCommand(ctx,spriteList,asset,secret,charName,charColor,
         message = asset+" "+message
         charPose=random.randint(1,len(chars)-secret)
 
-    file = discord.File(drawInstan.drawCharacterTalk(charName,charColor,chars[charPose-1],message), filename="Drink.jpeg")
+    file = discord.File(drawInstan.drawCharacterTalk(charName,charColor,chars[charPose-1],message,charHeight), filename="Drink.jpeg")
     await ctx.send(file=file)
 
 intents = discord.Intents(33280)
@@ -81,7 +81,7 @@ jillSprites = ["img\jill\Jill.webp",
         "img\jill\KidJill.webp"]
 @bot.command()
 async def jill(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,jillSprites,asset,1,"Jill",(105,129,193),message)
+    await drawCharacterByCommand(ctx,jillSprites,asset,1,"Jill",(105,129,193),message,364)
 
 gillSprites = ["img\gill\Gill.png",
                "img\gill\GillFuckboy.png",
@@ -90,7 +90,7 @@ gillSprites = ["img\gill\Gill.png",
                "img\gill\GillSad.png"]
 @bot.command()
 async def gill(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,gillSprites,asset,0,"Gillian",(124,44,179),message)
+    await drawCharacterByCommand(ctx,gillSprites,asset,0,"Gillian",(124,44,179),message,422)
 
 danaSprites = ["img\dana\Dana.png",
                "img\dana\DanaWorry.png",
@@ -101,20 +101,20 @@ danaSprites = ["img\dana\Dana.png",
                "img\dana\KidDana.webp"]
 @bot.command()
 async def dana(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,danaSprites,asset,1,"Dana",(199,33,35),message)
+    await drawCharacterByCommand(ctx,danaSprites,asset,1,"Dana",(199,33,35),message,414)
 
 donovanSprites = ["img\donovan\Donovan.png",
                   "img\donovan\DonovanHappy.png",
                   "img\donovan\DonovanLaugh.png"]
 @bot.command()
 async def donovan(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,donovanSprites,asset,0,"Mr. Donovan",(167,75,86),message)
+    await drawCharacterByCommand(ctx,donovanSprites,asset,0,"Mr. Donovan",(167,75,86),message,412)
 
 ingramSprites = ["img\ingram\Ingram.png",
                  "img\ingram\IngramEyesClosed.png"]
 @bot.command()
 async def ingram(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,ingramSprites,asset,0,"Ingram",(208,59,37),message)
+    await drawCharacterByCommand(ctx,ingramSprites,asset,0,"Ingram",(208,59,37),message,406)
 
 seiSprites = ["img\sei\SeiHelmet.png",
               "img\sei\Sei.png",
@@ -129,7 +129,7 @@ seiSprites = ["img\sei\SeiHelmet.png",
               "img\sei\SeiBandageHappy.png"]
 @bot.command()
 async def sei(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,seiSprites,asset,0,"Sei",(92,167,172),message)
+    await drawCharacterByCommand(ctx,seiSprites,asset,0,"Sei",(92,167,172),message,384)
 
 kimSprites = ["img\kim\Kim.png",
               "img\kim\KimAngry.png",
@@ -137,7 +137,7 @@ kimSprites = ["img\kim\Kim.png",
               "img\kim\KimMURDERMURDER.png"]
 @bot.command()
 async def kim(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,kimSprites,asset,0,"Kim",(193,124,207),message)
+    await drawCharacterByCommand(ctx,kimSprites,asset,0,"Kim",(193,124,207),message,382)
 
 dorothySprites = ["img\dorothy\Dorothy.png",
                   "img\dorothy\DorothyHeartMouth.png",
@@ -155,7 +155,7 @@ dorothySprites = ["img\dorothy\Dorothy.png",
                   "img\dorothy\DorothyKids.webp"]
 @bot.command()
 async def dorothy(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,dorothySprites,asset,1,"Dorothy",(245,11,158),message)
+    await drawCharacterByCommand(ctx,dorothySprites,asset,1,"Dorothy",(245,11,158),message,314)
 
 jamieSprites = ["img\jamie\Jamie.png",
                 "img\jamie\JamieThinking.png",
@@ -163,7 +163,7 @@ jamieSprites = ["img\jamie\Jamie.png",
                 "img\jamie\JamieWorried.png"]
 @bot.command()
 async def jamie(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,jamieSprites,asset,0,"Jamie",(162,120,52),message)
+    await drawCharacterByCommand(ctx,jamieSprites,asset,0,"Jamie",(162,120,52),message,438)
 
 kiramikiSprites = ["img\kiramiki\KiraMiki.png",
                    "img\kiramiki\KiraMikiAngry.png",
@@ -173,7 +173,7 @@ kiramikiSprites = ["img\kiramiki\KiraMiki.png",
                    "img\kiramiki\KiraMikiOld2.png"]
 @bot.command()
 async def kiramiki(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,kiramikiSprites,asset,2,"*Kira* Miki",(50,114,52),message)
+    await drawCharacterByCommand(ctx,kiramikiSprites,asset,2,"*Kira* Miki",(50,114,52),message,388)
 
 almaSprites = ["img\\alma\Alma.png",
                "img\\alma\AlmaDrunk.png",
@@ -188,7 +188,7 @@ almaSprites = ["img\\alma\Alma.png",
                "img\\alma\AlmaKid.webp"]
 @bot.command()
 async def alma(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,almaSprites,asset,0,"Alma",(248,190,65),message)
+    await drawCharacterByCommand(ctx,almaSprites,asset,0,"Alma",(248,190,65),message,418)
 
 stellaSprites = ["img\stella\Stella.png",
                  "img\stella\StellaAwooo.png",
@@ -200,7 +200,7 @@ stellaSprites = ["img\stella\Stella.png",
                 "img\stella\KidStella.webp"]
 @bot.command()
 async def stella(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,stellaSprites,asset,1,"Stella",(243,49,197),message)
+    await drawCharacterByCommand(ctx,stellaSprites,asset,1,"Stella",(243,49,197),message,356)
 
 artSprites = ["img\\artvondelay\ArtVonDelay.png",
               "img\\artvondelay\ArtVonDelayEyesClosed.png",
@@ -208,7 +208,7 @@ artSprites = ["img\\artvondelay\ArtVonDelay.png",
               "img\\artvondelay\ArtVonDelayWorried.png"]
 @bot.command()
 async def art(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,artSprites,asset,0,"Art",(201,201,201),message)
+    await drawCharacterByCommand(ctx,artSprites,asset,0,"Art",(201,201,201),message,356)
 
 nicoleSprites = ["img\\nicole\\Nicole.png",
                  "img\\nicole\\NicoleAwoo.png",
@@ -220,7 +220,7 @@ nicoleSprites = ["img\\nicole\\Nicole.png",
                  "img\\nicole\\NicoleUltraYay.png"]
 @bot.command()
 async def nicole(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,nicoleSprites,asset,0,"Streaming-chan",(76,174,211),message)
+    await drawCharacterByCommand(ctx,nicoleSprites,asset,0,"Streaming-chan",(76,174,211),message,432)
 
 bettySprites = ["img\\betty\Betty.png",
                 "img\\betty\BettyDrunk.png",
@@ -230,18 +230,18 @@ bettySprites = ["img\\betty\Betty.png",
                 "img\\betty\KidBetty.webp"]
 @bot.command()
 async def betty(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,bettySprites,asset,1,"Betty",(94,232,51),message)
+    await drawCharacterByCommand(ctx,bettySprites,asset,1,"Betty",(94,232,51),message,340)
 
 dealSprites = ["img\deal\Deal.png",
                "img\deal\DealClosedEyes.png"]
 @bot.command()
 async def deal(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,dealSprites,asset,0,"Deal",(204,255,112),message)
+    await drawCharacterByCommand(ctx,dealSprites,asset,0,"Deal",(204,255,112),message,388)
 
 taylorSprites = ["img\\taylor\\Taylor.png"]
 @bot.command()
 async def taylor(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,taylorSprites,asset,0,"Taylor",(241,173,188),message)
+    await drawCharacterByCommand(ctx,taylorSprites,asset,0,"Taylor",(241,173,188),message,210)
 
 virgilioSprites = ["img\\virgilio\\Virgilio.png",
                    "img\\virgilio\\VirgilioSmug.png",
@@ -249,31 +249,31 @@ virgilioSprites = ["img\\virgilio\\Virgilio.png",
                    "img\\virgilio\\VirgilioThinking.png"]
 @bot.command()
 async def virgilio(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,virgilioSprites,asset,0,"Virgilio",(161,126,180),message)
+    await drawCharacterByCommand(ctx,virgilioSprites,asset,0,"Virgilio",(161,126,180),message,476)
 
 brianSprites = ["img\\brian\\Brian.png",
                 "img\\brian\\BrianEyesClosed.png"]
 @bot.command()
 async def brian(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,brianSprites,asset,0,"Brian",(223,191,68),message)
+    await drawCharacterByCommand(ctx,brianSprites,asset,0,"Brian",(223,191,68),message,396)
 
 cassSprites = ["img\cass\Cass.png",
                 "img\cass\CassEyesClosed.png",
                 "img\cass\CassFocus.png"]
 @bot.command()
 async def cass(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,cassSprites,asset,0,"Cass",(168,121,176),message)
+    await drawCharacterByCommand(ctx,cassSprites,asset,0,"Cass",(168,121,176),message,162)
 
 radShibaSprites = ["img\dogs\RadShiba.png"]
 @bot.command()
 async def radshiba(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,radShibaSprites,asset,0,"Rad Shiba",(242,242,92),message)
+    await drawCharacterByCommand(ctx,radShibaSprites,asset,0,"Rad Shiba",(242,242,92),message,222)
 
 normaSprites = ["img\\norma\\Norma.png",
                 "img\\norma\\NormaEyesClosed.png"]
 @bot.command()
 async def norma(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,normaSprites,asset,0,"Norma",(247,14,141),message)
+    await drawCharacterByCommand(ctx,normaSprites,asset,0,"Norma",(247,14,141),message,336)
 
 gabbySprites = ["img\gabby\Gabby.png",
                 "img\gabby\GabbyAngry.png",
@@ -285,42 +285,42 @@ gabbySprites = ["img\gabby\Gabby.png",
                 "img\gabby\GabbySmile.png"]
 @bot.command()
 async def gabby(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,gabbySprites,asset,0,"Gabby",(148,101,117),message)
+    await drawCharacterByCommand(ctx,gabbySprites,asset,0,"Gabby",(148,101,117),message,354)
 
 nachoSprites = ["img\dogs\\Nacho.png"]
 @bot.command()
 async def nacho(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,nachoSprites,asset,0,"Nacho",(155,87,110),message)
+    await drawCharacterByCommand(ctx,nachoSprites,asset,0,"Nacho",(155,87,110),message,222)
 
 vellaSprites = ["img\\vella\\Vella.png",
                 "img\\vella\\VellaEyesClosed.png"]
 @bot.command()
 async def vella(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,vellaSprites,asset,0,"\"Vella\"",(240,194,196),message)
+    await drawCharacterByCommand(ctx,vellaSprites,asset,0,"\"Vella\"",(240,194,196),message,388)
 
 essentiaSprites = ["img\essentia\Essentia.png",
                 "img\essentia\EssentiaEyesClosed.png"]
 @bot.command()
 async def essentia(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,essentiaSprites,asset,0,"Essentia",(180,198,160),message)
+    await drawCharacterByCommand(ctx,essentiaSprites,asset,0,"Essentia",(180,198,160),message,372)
 
 lexiSprites = ["img\lexi\Lexi.png",
                 "img\lexi\LexiEyesClosed.png"]
 @bot.command()
 async def lexi(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,lexiSprites,asset,0,"Lexi",(65,170,228),message)
+    await drawCharacterByCommand(ctx,lexiSprites,asset,0,"Lexi",(65,170,228),message,370)
 
 tomcatSprites = ["img\\tomcat\\TOMCAT.png",
                 "img\\tomcat\\TOMCATeyesClosed.png"]
 @bot.command()
 async def tomcat(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,tomcatSprites,asset,0,"TOMCAT",(248,242,194),message)
+    await drawCharacterByCommand(ctx,tomcatSprites,asset,0,"TOMCAT",(248,242,194),message,418)
 
 jessSprites = ["img\jess\Jess.png",
                 "img\jess\JessEyesClosed.png"]
 @bot.command()
 async def jess(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,jessSprites,asset,0,"Jess",(238,105,124),message)
+    await drawCharacterByCommand(ctx,jessSprites,asset,0,"Jess",(238,105,124),message,428)
 
 annaSprites = ["img\\anna\\Anna.png",
                 "img\\anna\AnnaGlitch1.png",
@@ -334,7 +334,7 @@ annaSprites = ["img\\anna\\Anna.png",
                 "img\\anna\\AnnaOld.png"]
 @bot.command()
 async def anna(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,annaSprites,asset,1,"Anna",(255,255,255),message)
+    await drawCharacterByCommand(ctx,annaSprites,asset,1,"Anna",(255,255,255),message,370)
 
 marioSprites = ["img\mario\Mario.png",
                 "img\mario\MarioHappy.png",
@@ -345,7 +345,7 @@ marioSprites = ["img\mario\Mario.png",
                 "img\mario\MarioWorry.png"]
 @bot.command()
 async def mario(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,marioSprites,asset,1,"Mario",(173,3,50),message)
+    await drawCharacterByCommand(ctx,marioSprites,asset,1,"Mario",(173,3,50),message,454)
 
 @bot.command()
 async def help(ctx):

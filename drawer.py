@@ -154,7 +154,7 @@ class Drawer():
             im.save(img_path, subsampling=0, quality=95)
             return img_path
 
-    def drawCharacterTalk(self,charName:str,charColor,charPath:str, message:str):
+    def drawCharacterTalk(self,charName:str,charColor,charPath:str, message:str,charHeight:int=430):
         finalMessage= charName + ": " + message
         lines = textwrap.wrap(finalMessage, width=50)
         with Image.open("img/BackGroundChat.jpg") as im:
@@ -167,7 +167,7 @@ class Drawer():
             d1.text((880,566),"Generated with ",(255, 255, 255),fontIn)
             d1.text((880,596),"CalicompBot",(255, 255, 255),fontIn)
             with Image.open(charPath) as imChar:
-                imChar = ImageOps.contain(imChar, (660, 430),Image.BOX)
+                imChar = ImageOps.contain(imChar, (660, charHeight),Image.BOX)
                 width, height = imChar.size
                 posx = 369-round((width/2))
                 posy = 536-round(height)
