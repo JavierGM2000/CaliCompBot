@@ -98,10 +98,13 @@ danaSprites = ["img\dana\Dana.png",
                "img\dana\DanaThink.png",
                "img\dana\DanaWorried.png",
                "img\dana\DanaSerious.png",
+               "img\dana\zane.png",
+               "img\dana\zane2.png",
+               "img\dana\zane3.png",
                "img\dana\KidDana.webp"]
 @bot.command()
 async def dana(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,danaSprites,asset,1,"Dana",(199,33,35),message,414)
+    await drawCharacterByCommand(ctx,danaSprites,asset,4,"Dana",(199,33,35),message,414)
 
 donovanSprites = ["img\donovan\Donovan.png",
                   "img\donovan\DonovanHappy.png",
@@ -126,10 +129,12 @@ seiSprites = ["img\sei\SeiHelmet.png",
               "img\sei\SeiBandageTear.png",
               "img\sei\SeiBandageWorried.png",
               "img\sei\SeiBandagWorriedEyesClosed.png",
-              "img\sei\SeiBandageHappy.png"]
+              "img\sei\SeiBandageHappy.png",
+              "img\sei\seiOld.png",
+              "img\sei\KidSei.webp"]
 @bot.command()
 async def sei(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,seiSprites,asset,0,"Sei",(92,167,172),message,384)
+    await drawCharacterByCommand(ctx,seiSprites,asset,2,"Sei",(92,167,172),message,384)
 
 kimSprites = ["img\kim\Kim.png",
               "img\kim\KimAngry.png",
@@ -156,10 +161,15 @@ dorothySprites = ["img\dorothy\Dorothy.png",
                   "img\dorothy\dorothy-cat.png",
                   "img\dorothy\dorothy detail.png",
                   "img\dorothy\dorothy detail cat.png",
+                  "img\dorothy\sprite-corte_18.png",
+                  "img\dorothy\dorothy-lost.png",
+                  "img\dorothy\dorothy-pachi.png",
+                  "img\dorothy\dorothy-puchero.png",
+                  "img\dorothy\dorothy-smug.png",
                   "img\dorothy\DorothyKids.webp"]
 @bot.command()
 async def dorothy(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,dorothySprites,asset,1,"Dorothy",(245,11,158),message,314)
+    await drawCharacterByCommand(ctx,dorothySprites,asset,6,"Dorothy",(245,11,158),message,314)
 
 jamieSprites = ["img\jamie\Jamie.png",
                 "img\jamie\JamieThinking.png",
@@ -197,7 +207,7 @@ almaSprites = ["img\\alma\Alma.png",
                "img\\alma\AlmaKid.webp"]
 @bot.command()
 async def alma(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,almaSprites,asset,1,"Alma",(248,190,65),message,418)
+    await drawCharacterByCommand(ctx,almaSprites,asset,4,"Alma",(248,190,65),message,418)
 
 stellaSprites = ["img\stella\Stella.png",
                  "img\stella\StellaAwooo.png",
@@ -206,18 +216,20 @@ stellaSprites = ["img\stella\Stella.png",
                 "img\stella\StellaSmile.png",
                 "img\stella\StellaSurprise.png",
                 "img\stella\StellaTired.png",
+                "img\stella\stellaOld.png",
                 "img\stella\KidStella.webp"]
 @bot.command()
 async def stella(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,stellaSprites,asset,1,"Stella",(243,49,197),message,356)
+    await drawCharacterByCommand(ctx,stellaSprites,asset,2,"Stella",(243,49,197),message,356)
 
-artSprites = ["img\\artvondelay\ArtVonDelay.png",
-              "img\\artvondelay\ArtVonDelayEyesClosed.png",
-              "img\\artvondelay\ArtVonDelaySurprised.png",
-              "img\\artvondelay\ArtVonDelayWorried.png"]
+artSprites = ["img\\artvondelay\\ArtVonDelay.png",
+              "img\\artvondelay\\ArtVonDelayEyesClosed.png",
+              "img\\artvondelay\\ArtVonDelaySurprised.png",
+              "img\\artvondelay\\ArtVonDelayWorried.png",
+              "img\\artvondelay\\artOld.png"]
 @bot.command()
 async def art(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,artSprites,asset,0,"Art",(201,201,201),message,356)
+    await drawCharacterByCommand(ctx,artSprites,asset,1,"Art",(201,201,201),message,356)
 
 nicoleSprites = ["img\\nicole\\Nicole.png",
                  "img\\nicole\\NicoleAwoo.png",
@@ -236,13 +248,21 @@ bettySprites = ["img\\betty\Betty.png",
                 "img\\betty\BettyWhenLilim.png",
                 "img\\betty\BettyWhenNoLilim.png",
                 "img\\betty\BettyWorried.png",
-                "img\\betty\KidBetty.webp"]
+                "img\\betty\\vet.png",
+                "img\\betty\\vet 2.png",
+                "img\\betty\\vet 3.png",
+                "img\\betty\\drunk vet.png",
+                "img\\betty\\vet drunk 2.png",
+                "img\\betty\\vet drunk 3.png",
+                "img\\betty\\vet smug.png",
+                "img\\betty\\KidBetty.webp"]
 @bot.command()
 async def betty(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,bettySprites,asset,1,"Betty",(94,232,51),message,340)
+    await drawCharacterByCommand(ctx,bettySprites,asset,8,"Betty",(94,232,51),message,340)
 
 dealSprites = ["img\deal\Deal.png",
-               "img\deal\DealClosedEyes.png"]
+               "img\deal\DealClosedEyes.png",
+               "img\deal\dealOld.png"]
 @bot.command()
 async def deal(ctx,asset,*,message=""):
     await drawCharacterByCommand(ctx,dealSprites,asset,0,"Deal",(204,255,112),message,388)
@@ -255,10 +275,11 @@ async def taylor(ctx,asset,*,message=""):
 virgilioSprites = ["img\\virgilio\\Virgilio.png",
                    "img\\virgilio\\VirgilioSmug.png",
                    "img\\virgilio\\VirgilioThinking.png",
-                   "img\\virgilio\\VirgilioThinking.png"]
+                   "img\\virgilio\\VirgilioThinking.png",
+                   "img\\virgilio\\armandio.png"]
 @bot.command()
 async def virgilio(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,virgilioSprites,asset,0,"Virgilio",(161,126,180),message,476)
+    await drawCharacterByCommand(ctx,virgilioSprites,asset,1,"Virgilio",(161,126,180),message,476)
 
 brianSprites = ["img\\brian\\Brian.png",
                 "img\\brian\\BrianEyesClosed.png"]
@@ -277,6 +298,11 @@ radShibaSprites = ["img\dogs\RadShiba.png"]
 @bot.command()
 async def radshiba(ctx,asset,*,message=""):
     await drawCharacterByCommand(ctx,radShibaSprites,asset,0,"Rad Shiba",(242,242,92),message,222)
+
+corgiSprites = ["img\dogs\corgi.png"]
+@bot.command()
+async def corgi(ctx,asset,*,message=""):
+    await drawCharacterByCommand(ctx,corgiSprites,asset,0,"Corgi",(242,242,92),message,222)
 
 normaSprites = ["img\\norma\\Norma.png",
                 "img\\norma\\NormaEyesClosed.png"]
