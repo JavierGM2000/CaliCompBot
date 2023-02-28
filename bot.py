@@ -383,8 +383,22 @@ async def mario(ctx,asset,*,message=""):
     await drawCharacterByCommand(ctx,marioSprites,asset,1,"Mario",(173,3,50),message,454)
 
 @bot.command()
+async def beer(ctx,character:str,*,message=""):
+    if(character.lower()=="jill"):
+        charID=1
+    elif(character.lower()=="dana"):
+        charID=2
+    else:
+        await ctx.send("The first argument must be Jill or Dana")
+        return
+    
+    file = discord.File(drawInstan.drawBeerScene(charID,message), filename="Beer.jpeg")
+    await ctx.send(file=file)
+
+
+@bot.command()
 async def help(ctx):
-    await ctx.send('&drink [id or name] - Shows info about the drink \n &rand - Shows info about a random drink \n &jill [sprite_id optional] text - Generates a image with the given text, without sprite id, the sprite is random \n Character aviable: &anna, &art, &betty, &brian, &cass, &dana, &deal,&radshiba, &nacho, &donovan, &dorothy, &essentia, &gabby, &gill, &ingram, &jamie, &jess, &jill, &kim, &kiramiki, &lexi, &mario, &nicole, &norma, &sei, &stella, &taylor, &tomcat, &vella, &virgilio \n Some characters have secret sprites that can\'t appear randomly')
+    await ctx.send('&drink [id or name] - Shows info about the drink \n &rand - Shows info about a random drink \n &beer [jill or dana] message - Generates the scene when Jill and Dana are drinking on Jill\'s home \n &jill [sprite_id optional] text - Generates a image with the given text, without sprite id, the sprite is random \n Character aviable: &anna, &art, &betty, &brian, &cass, &dana, &deal,&radshiba, &nacho, &donovan, &dorothy, &essentia, &gabby, &gill, &ingram, &jamie, &jess, &jill, &kim, &kiramiki, &lexi, &mario, &nicole, &norma, &sei, &stella, &taylor, &tomcat, &vella, &virgilio \n Some characters have secret sprites that can\'t appear randomly')
 
 @bot.command()
 async def sdown(ctx):

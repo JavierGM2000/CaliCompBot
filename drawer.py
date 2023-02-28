@@ -177,6 +177,30 @@ class Drawer():
             imgPath = "img/generatedChat/Gen"+str(ts)+"-"+str(random.randint(0,9999))+".jpeg"
             im.save(imgPath,format='JPEG', subsampling=0, quality=95)
             return (imgPath)
+        
+    def drawBeerScene(self,charId,message):
+        if(charId==1):
+            name = "Jill: "
+            charColor = (105,129,193)
+        else:
+            name = "Dana: "
+            charColor = (199,33,35)
+
+        message = name + message
+        with Image.open("img\BackGroundBeer.jpg") as im:
+            d1 = ImageDraw.Draw(im)
+            lines = textwrap.wrap(message, width=46)
+            yheigh = 490
+            for line in lines:
+                d1.text((96, yheigh), line, (255, 255, 255), fontIn)
+                yheigh += 30 
+            
+            d1.text((96,490),name,charColor,fontIn)
+            d1.text((80,650),"Generated with CalicomBot",(255, 255, 255),fontIn)
+            ts = time.time()
+            imgPath = "img/generatedBeer/Gen"+str(ts)+"-"+str(random.randint(0,9999))+".jpeg"
+            im.save(imgPath,format='JPEG', subsampling=0, quality=95)
+            return (imgPath)
 
     #Gets the path of the image with a drink id
     def getImagePath(self,dbConnection:Database,drink_ID:int):
