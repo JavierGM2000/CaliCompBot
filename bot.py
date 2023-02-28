@@ -169,7 +169,7 @@ dorothySprites = ["img\dorothy\Dorothy.png",
                   "img\dorothy\DorothyKids.webp"]
 @bot.command()
 async def dorothy(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,dorothySprites,asset,6,"Dorothy",(245,11,158),message,314)
+    await drawCharacterByCommand(ctx,dorothySprites,asset,10,"Dorothy",(245,11,158),message,314)
 
 jamieSprites = ["img\jamie\Jamie.png",
                 "img\jamie\JamieThinking.png",
