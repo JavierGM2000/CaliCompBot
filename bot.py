@@ -395,6 +395,50 @@ async def beer(ctx,character:str,*,message=""):
     file = discord.File(drawInstan.drawBeerScene(charID,message), filename="Beer.jpeg")
     await ctx.send(file=file)
 
+@bot.command()
+async def beertalk(ctx,*,message=""):
+    if message=="":
+       await ctx.send("Data must be given for this command to work")
+       return 
+    
+    arguments = message.split('//')
+    if(len(arguments)<=1):
+        await ctx.send("Debe haber como mínimo un argumento")
+        return
+    elif(len(arguments)>=12):
+        await ctx.send("Can't have more than 10 arguments")
+        return
+
+    errors = []
+    result = []
+    i = 0
+    for arg in arguments:
+        i+=1
+        charData = arg.split(';')
+        if(len(charData)<=1 or len(charData)>2):
+            errors.append("Error in argument "+ str(i))
+            continue
+        
+        if (charData[0].lower()=="jill"):
+            charID=1
+        elif(charData[0].lower()=="dana"):
+            charID=2
+        else:
+            errors.append("The first argument must be Jill or Dana in argument " + str(i))
+            continue
+
+        result.append(drawInstan.drawBeerScene(charID,charData[1])) 
+        
+    
+    for err in errors:
+        await ctx.send(err)
+
+    files = []
+    for res in result:
+        files.append(discord.File(res, filename="Beer.jpeg"))
+
+    await ctx.send(files=files)
+
 
 @bot.command()
 async def help(ctx):
