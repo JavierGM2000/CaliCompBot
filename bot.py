@@ -265,7 +265,7 @@ dealSprites = ["img\deal\Deal.png",
                "img\deal\dealOld.png"]
 @bot.command()
 async def deal(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,dealSprites,asset,0,"Deal",(204,255,112),message,388)
+    await drawCharacterByCommand(ctx,dealSprites,asset,1,"Deal",(204,255,112),message,388)
 
 taylorSprites = ["img\\taylor\\Taylor.png"]
 @bot.command()
@@ -380,7 +380,7 @@ marioSprites = ["img\mario\Mario.png",
                 "img\mario\MarioWorry.png"]
 @bot.command()
 async def mario(ctx,asset,*,message=""):
-    await drawCharacterByCommand(ctx,marioSprites,asset,1,"Mario",(173,3,50),message,454)
+    await drawCharacterByCommand(ctx,marioSprites,asset,0,"Mario",(173,3,50),message,454)
 
 @bot.command()
 async def beer(ctx,character:str,*,message=""):
@@ -439,6 +439,83 @@ async def beertalk(ctx,*,message=""):
 
     await ctx.send(files=files)
 
+characters = {
+                "jill" : ["Jill",jillSprites,(105,129,193),1,364],
+                "gill" : ["Gill",gillSprites,(124,44,179),0,422],
+                "dana" : ["Dana",danaSprites,(199,33,35),4,414],
+                "donovan" : ["Mr. Donovan",donovanSprites,(167,75,86),0,412],
+                "sei" : ["Sei",seiSprites,(92,167,172),2,384],
+                "kim" : ["Kim",kimSprites,(193,124,207),0,382],
+                "dorothy" : ["Dorothy",dorothySprites,(245,11,158),10,314],
+                "jamie" : ["Jamie",jamieSprites,(162,120,52),2,438],
+                "kiramiki" : ["*Kira* Miki",kiramikiSprites,(50,114,52),2,388],
+                "alma" : ["Alma",almaSprites,(248,190,65),4,418],
+                "stella" : ["Stella",stellaSprites,(243,49,197),2,356],
+                "art" : ["Art",artSprites,(201,201,201),1,356],
+                "nicole" : ["Streaming-chan",nicoleSprites,(76,174,211),0,432],
+                "betty" : ["Betty",bettySprites,(94,232,51),8,340],
+                "deal" : ["Deal",dealSprites,(204,255,112),1,388],
+                "taylor" : ["Taylor",taylorSprites,(241,173,188),0,210],
+                "virgilio" : ["Virgilio",virgilioSprites,(161,126,180),1,476],
+                "brian" : ["Brian",brianSprites,(223,191,68),0,396],
+                "cass" : ["Cass",cassSprites,(168,121,176),0,162],
+                "radshiba" : ["Rad Shiba",radShibaSprites,(242,242,92),0,222],
+                "corgi" : ["Corgia",corgiSprites,(242,242,92),0,222],
+                "norma" : ["Norma",normaSprites,(247,14,141),0,336],
+                "gabby" : ["Gabby",gabbySprites,(148,101,117),0,354],
+                "nacho" : ["Nacho",nachoSprites,(155,87,110),0,222],
+                "vella" : ["\"Vella\"",vellaSprites,(240,194,196),0,388],
+                "essentia" : ["Essentia",essentiaSprites,(180,198,160),0,372],
+                "lexi" : ["Lexi",lexiSprites,(65,170,228),0,370],
+                "tomcat" : ["TOMCAT",tomcatSprites,(248,242,194),0,418],
+                "jess" : ["Jess",jessSprites,(238,105,124),0,428],
+                "anna" : ["Anna",annaSprites,(255,255,255),1,370],
+                "mario" : ["Mario",marioSprites,(173,3,50),0,454],
+            }
+
+@bot.command()
+async def conversation(ctx,*,message=""):
+    if message=="":
+        await ctx.send("Data must be given for this command to work")
+        return
+    arguments = message.split('//')
+    if(len(arguments)>=15):
+        await ctx.send("Can't have more than 150 arguments")
+        return
+
+    errors = []
+    result = []
+    i = 0
+    for arg in arguments:
+        i+=1
+        charData = arg.split(';')
+        if(len(charData)<=1 or len(charData)>3):
+            errors.append("Error in argument "+ str(i))
+            continue
+
+        if charData[0].lower() in characters:
+            charInfo = characters.get(charData[0].lower())
+            if(len(charData)==3):
+                messagePost=2
+                spriteID=int(charData[1])
+                if(spriteID>len(charInfo[1]) or spriteID<=0):
+                    errors.append("Sprite selector has to be between 1 and "+ str(len(charInfo[1]))+" in argument "+ str(i))
+                    spriteID=random.randint(1,len(charInfo[1])-int(charInfo[3]))
+                
+            else:
+                messagePost=1
+                print(charData[0].lower())
+                spriteID=random.randint(1,len(charInfo[1])-int(charInfo[3]))
+            
+            result.append(discord.File(drawInstan.drawCharacterTalk(charInfo[0],charInfo[2],charInfo[1][spriteID-1],charData[messagePost],charInfo[4]), filename="Drink.jpeg"))
+        else:
+            errors.append("Character not found in argument "+ str(i))
+            continue
+
+    for err in errors:
+        await ctx.send(err)
+
+    await ctx.send(files=result)
 
 @bot.command()
 async def help(ctx):
