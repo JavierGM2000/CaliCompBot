@@ -180,29 +180,44 @@ class Drawer():
             return (imgPath)
     
     def drawCharacterGif(self,charName:str,charColor,charPath:str, message:str,charHeight:int=430):
-        finalMessage= charName + ": " + message
-        finalMessage = finalMessage[0:200]
-        lines = textwrap.wrap(finalMessage, width=50)
-        with Image.open("img/BackGroundChat.jpg") as im:
-            d1 = ImageDraw.Draw(im)
-            y_text =556
-            for line in lines:
-                d1.text((46, y_text), line, (255, 255, 255), fontIn)
-                y_text += 30 
-            d1.text((46,556),charName+":",charColor,fontIn)
-            d1.text((880,566),"Generated with ",(255, 255, 255),fontIn)
-            d1.text((880,596),"CalicompBot",(255, 255, 255),fontIn)
-            with Image.open(charPath) as imChar:
-                imChar = ImageOps.contain(imChar, (660, charHeight),Image.BOX)
-                width, height = imChar.size
-                posx = 369-round((width/2))
-                posy = 536-round(height)
-                im.paste(imChar, (posx, posy), imChar)
+        maxtextLength = 200 - len(charName+": ")
+        if(len(message)>maxtextLength):
+            message = message[0:maxtextLength]
+        else:
+            maxtextLength = len(message)
+        generatedImages = []
+        i=0
+        while i <= maxtextLength:
+            i+=1
+            finalMessage= charName + ": " + message[0:i]
+            finalMessage = finalMessage[0:200]
+            lines = textwrap.wrap(finalMessage, width=50)
+            with Image.open("img/BackGroundChat.jpg") as im:
+                d1 = ImageDraw.Draw(im)
+                y_text =556
+                for line in lines:
+                    d1.text((46, y_text), line, (255, 255, 255), fontIn)
+                    y_text += 30 
+                d1.text((46,556),charName+":",charColor,fontIn)
+                d1.text((880,566),"Generated with ",(255, 255, 255),fontIn)
+                d1.text((880,596),"CalicompBot",(255, 255, 255),fontIn)
+                with Image.open(charPath) as imChar:
+                    imChar = ImageOps.contain(imChar, (660, charHeight),Image.BOX)
+                    width, height = imChar.size
+                    posx = 369-round((width/2))
+                    posy = 536-round(height)
+                    im.paste(imChar, (posx, posy), imChar)
 
-            ts = time.time()
-            imgPath = "img/generatedChat/Gen"+str(ts)+"-"+str(random.randint(0,9999))+".jpeg"
-            im.save(imgPath,format='JPEG', subsampling=0, quality=95)
-            return (imgPath)
+                generatedImages.append(im)
+                if(i==maxtextLength):
+                    for x in range(50):
+                        generatedImages.append(im)
+
+
+        ts = time.time()
+        imgPath = "img/generatedChat/Gen"+str(ts)+"-"+str(random.randint(0,9999))+".gif"
+        generatedImages[0].save(imgPath, format="GIF", append_images=generatedImages[1:],save_all=True, duration=50, loop=0)
+        return (imgPath)
         
     def drawBeerScene(self,charId,message):
         if(charId==1):
