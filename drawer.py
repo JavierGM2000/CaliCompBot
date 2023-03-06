@@ -156,14 +156,40 @@ class Drawer():
 
     def drawCharacterTalk(self,charName:str,charColor,charPath:str, message:str,charHeight:int=430):
         finalMessage= charName + ": " + message
+        finalMessage = finalMessage[0:200]
         lines = textwrap.wrap(finalMessage, width=50)
         with Image.open("img/BackGroundChat.jpg") as im:
             d1 = ImageDraw.Draw(im)
-            y_text =566
+            y_text =556
             for line in lines:
                 d1.text((46, y_text), line, (255, 255, 255), fontIn)
                 y_text += 30 
-            d1.text((46,566),charName+":",charColor,fontIn)
+            d1.text((46,556),charName+":",charColor,fontIn)
+            d1.text((880,566),"Generated with ",(255, 255, 255),fontIn)
+            d1.text((880,596),"CalicompBot",(255, 255, 255),fontIn)
+            with Image.open(charPath) as imChar:
+                imChar = ImageOps.contain(imChar, (660, charHeight),Image.BOX)
+                width, height = imChar.size
+                posx = 369-round((width/2))
+                posy = 536-round(height)
+                im.paste(imChar, (posx, posy), imChar)
+
+            ts = time.time()
+            imgPath = "img/generatedChat/Gen"+str(ts)+"-"+str(random.randint(0,9999))+".jpeg"
+            im.save(imgPath,format='JPEG', subsampling=0, quality=95)
+            return (imgPath)
+    
+    def drawCharacterGif(self,charName:str,charColor,charPath:str, message:str,charHeight:int=430):
+        finalMessage= charName + ": " + message
+        finalMessage = finalMessage[0:200]
+        lines = textwrap.wrap(finalMessage, width=50)
+        with Image.open("img/BackGroundChat.jpg") as im:
+            d1 = ImageDraw.Draw(im)
+            y_text =556
+            for line in lines:
+                d1.text((46, y_text), line, (255, 255, 255), fontIn)
+                y_text += 30 
+            d1.text((46,556),charName+":",charColor,fontIn)
             d1.text((880,566),"Generated with ",(255, 255, 255),fontIn)
             d1.text((880,596),"CalicompBot",(255, 255, 255),fontIn)
             with Image.open(charPath) as imChar:

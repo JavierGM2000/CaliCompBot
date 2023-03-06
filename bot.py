@@ -4,6 +4,7 @@ import os
 import random
 
 import discord
+from discord import app_commands
 from discord.ext.commands import Bot, Context
 from discord.ext import commands
 
@@ -11,6 +12,8 @@ from db import Database
 from drawer import Drawer
 
 from dotenv import load_dotenv
+
+from PIL import Image
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -516,6 +519,102 @@ async def conversation(ctx,*,message=""):
         await ctx.send(err)
 
     await ctx.send(files=result)
+
+@bot.command()
+async def conversation2(ctx,*,message=""):
+    if message=="":
+        await ctx.send("Data must be given for this command to work")
+        return
+    arguments = message.split('//')
+    if(len(arguments)>=15):
+        await ctx.send("Can't have more than 150 arguments")
+        return
+
+    errors = []
+    result = []
+    i = 0
+    for arg in arguments:
+        i+=1
+        charData = arg.split(';')
+        if(len(charData)<=1 or len(charData)>3):
+            errors.append("Error in argument "+ str(i))
+            continue
+
+        if charData[0].lower() in characters:
+            charInfo = characters.get(charData[0].lower())
+            if(len(charData)==3):
+                messagePost=2
+                spriteID=int(charData[1])
+                if(spriteID>len(charInfo[1]) or spriteID<=0):
+                    errors.append("Sprite selector has to be between 1 and "+ str(len(charInfo[1]))+" in argument "+ str(i))
+                    spriteID=random.randint(1,len(charInfo[1])-int(charInfo[3]))
+                
+            else:
+                messagePost=1
+                print(charData[0].lower())
+                spriteID=random.randint(1,len(charInfo[1])-int(charInfo[3]))
+            
+            result.append(discord.File(drawInstan.drawCharacterTalk(charInfo[0],charInfo[2],charInfo[1][spriteID-1],charData[messagePost],charInfo[4]), filename="Drink.jpeg"))
+        else:
+            errors.append("Character not found in argument "+ str(i))
+            continue
+
+    for err in errors:
+        await ctx.send(err)
+
+    for file in result:
+        await ctx.send(file=file)
+
+@bot.command()
+async def conversation3(ctx,*,message=""):
+    
+    if message=="":
+        await ctx.send("Data must be given for this command to work")
+        return
+    arguments = message.split('//')
+    if(len(arguments)>=15):
+        await ctx.send("Can't have more than 150 arguments")
+        return
+
+    errors = []
+    result = []
+    i = 0
+    for arg in arguments:
+        i+=1
+        charData = arg.split(';')
+        if(len(charData)<=1 or len(charData)>3):
+            errors.append("Error in argument "+ str(i))
+            continue
+
+        if charData[0].lower() in characters:
+            charInfo = characters.get(charData[0].lower())
+            if(len(charData)==3):
+                messagePost=2
+                spriteID=int(charData[1])
+                if(spriteID>len(charInfo[1]) or spriteID<=0):
+                    errors.append("Sprite selector has to be between 1 and "+ str(len(charInfo[1]))+" in argument "+ str(i))
+                    spriteID=random.randint(1,len(charInfo[1])-int(charInfo[3]))
+                
+            else:
+                messagePost=1
+                print(charData[0].lower())
+                spriteID=random.randint(1,len(charInfo[1])-int(charInfo[3]))
+            
+            result.append(drawInstan.drawCharacterTalk(charInfo[0],charInfo[2],charInfo[1][spriteID-1],charData[messagePost],charInfo[4]))
+        else:
+            errors.append("Character not found in argument "+ str(i))
+            continue
+
+    for err in errors:
+        await ctx.send(err)
+
+    frames = []
+    for file in result:
+        frames.append(Image.open(file))
+
+    frames[0].save("img\generatedChat\conversation.gif", format="GIF", append_images=frames[1:],save_all=True, duration=2000, loop=0)
+    discFile=discord.File("img\generatedChat\conversation.gif", filename="Conversation.gif")
+    await ctx.send(file=discFile)
 
 @bot.command()
 async def help(ctx):
