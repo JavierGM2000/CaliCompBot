@@ -185,8 +185,10 @@ class Drawer():
             message = message[0:maxtextLength]
         else:
             maxtextLength = len(message)
+        duration = []
         generatedImages = []
         i=0
+        
         while i <= maxtextLength:
             i+=1
             finalMessage= charName + ": " + message[0:i]
@@ -207,16 +209,75 @@ class Drawer():
                     posx = 369-round((width/2))
                     posy = 536-round(height)
                     im.paste(imChar, (posx, posy), imChar)
-
-                generatedImages.append(im)
+                
+                generatedImages.append(im.copy())
                 if(i==maxtextLength):
-                    for x in range(50):
-                        generatedImages.append(im)
+                    duration.append(4000)
+                else:
+                    duration.append(50)
 
 
         ts = time.time()
         imgPath = "img/generatedChat/Gen"+str(ts)+"-"+str(random.randint(0,9999))+".gif"
-        generatedImages[0].save(imgPath, format="GIF", append_images=generatedImages[1:],save_all=True, duration=50, loop=0)
+        generatedImages[0].save(imgPath, format="GIF", append_images=generatedImages[1:],save_all=True, duration=duration, loop=0,disposal=3)
+        return (imgPath)
+    
+    def drawCharacterTalkGilf(self,charName:str,charColor,charPath:str,mouthSprites,mouthPos, message:str,charHeight:int=430):
+        maxtextLength = 200 - len(charName+": ")
+        if(len(message)>maxtextLength):
+            message = message[0:maxtextLength]
+        else:
+            maxtextLength = len(message)
+        generatedImages = []
+        duration = []
+        i=0
+        mouthCounter = 0 
+        mouthFrameCounter = 0
+        if not mouthSprites == None:
+            maxMouths = len(mouthSprites)
+        while i <= maxtextLength:
+            i+=1
+            finalMessage= charName + ": " + message[0:i]
+            finalMessage = finalMessage[0:200]
+            lines = textwrap.wrap(finalMessage, width=50)
+            with Image.open("img/BackGroundChat.jpg") as im:
+                d1 = ImageDraw.Draw(im)
+                y_text =556
+                for line in lines:
+                    d1.text((46, y_text), line, (255, 255, 255), fontIn)
+                    y_text += 30 
+                d1.text((46,556),charName+":",charColor,fontIn)
+                d1.text((880,566),"Generated with ",(255, 255, 255),fontIn)
+                d1.text((880,596),"CalicompBot",(255, 255, 255),fontIn)
+                with Image.open(charPath) as imChar:
+                    if i < maxtextLength :
+                        if not mouthSprites == None:
+                            with Image.open(mouthSprites[mouthCounter]) as imMouth:
+                                
+                                imChar.paste(imMouth,mouthPos,imMouth)
+                                
+                                mouthFrameCounter +=1
+                                if mouthFrameCounter >= 2:
+                                    mouthFrameCounter = 0
+                                    mouthCounter+=1
+                                if mouthCounter >= maxMouths:
+                                    mouthCounter=0
+                    imChar = ImageOps.contain(imChar, (660, charHeight),Image.BOX)
+                    width, height = imChar.size
+                    posx = 369-round((width/2))
+                    posy = 536-round(height)
+                    im.paste(imChar, (posx, posy), imChar)
+                
+                generatedImages.append(im.copy())
+                if(i==maxtextLength):
+                    duration.append(4000)
+                else:
+                    duration.append(50)
+
+
+        ts = time.time()
+        imgPath = "img/generatedChat/Gen"+str(ts)+"-"+str(random.randint(0,9999))+".gif"
+        generatedImages[0].save(imgPath, format="GIF", append_images=generatedImages[1:],save_all=True, duration=duration, loop=0,disposal=2,version='GIF89a')
         return (imgPath)
         
     def drawBeerScene(self,charId,message):
